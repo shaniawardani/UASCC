@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediLab</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    
+    <!-- Navbar start -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">Medi<span>Lab</span>.</a>
+    </nav>
+    <!-- Navbar end -->
+
+    <!-- Form Box start -->
+    <div class="form-box">
+        <!-- Login Form -->
+        <div class="login-container" id="login">
+            <div class="top">
+                <span>Don't have an account? <a href="#" id="sign-up-link">Sign Up</a></span>
+                <header>Login</header>
+            </div>
+            <div class="two-forms">
+                <div class="input-box">
+                    <input type="text" class="input-fields" placeholder="Username or Email" id="Username">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-fields" placeholder="Password" id="login-pass">
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+            </div>
+            <div class="input-box">
+                <input type="submit" class="submit" value="Sign-In" id="login-btn">
+            </div>
+            <div class="two-col">
+                <div class="one">
+                    <input type="checkbox" id="login-check">
+                    <label for="login-check">Remember Me</label>
+                </div>
+                <div class="two">
+                    <label><a href="#">Forgot Password?</a></label>
+                </div>
+            </div>
+        </div>
+        <!-- Registration Form -->
+        <div class="register-container" id="register" style="display: none;">
+            <div class="top">
+                <span>Have an account? <a href="#" onclick="login()">Login</a></span>
+                <header>Sign Up</header>
+            </div>
+            <div class="two-forms">
+                <div class="input-box">
+                    <input type="text" class="input-fields" placeholder="Firstname" id="fn">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-fields" placeholder="Lastname" id="ln">
+                    <i class="bx bx-user"></i>
+                </div>
+            </div>
+            <div class="input-box">
+                <input type="email" class="input-fields" placeholder="Email" id="email">
+                <i class="bx bx-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" class="input-fields" placeholder="Password" id="pass">
+                <i class="bx bx-lock-alt"></i>
+            </div>
+            <div class="input-box">
+                <input type="submit" class="submit" value="Register" id="reg">
+            </div>
+            <div class="two-col">
+                <div class="one">
+                    <input type="checkbox" id="register-check">
+                    <label for="register-check">Remember Me</label>
+                </div>
+                <div class="two">
+                    <label><a href="#">Terms & Conditions</a></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Form Box end -->
+
+    <!-- Icons -->
+    <script>feather.replace();</script>
+
+    <!-- JavaScript -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+    
+        // Konfigurasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyA4Rs6FtnHJFy0438vd_E7Bj95fFDKKG7w",
+            authDomain: "cloud-computing-41a84.firebaseapp.com",
+            databaseURL: "https://cloud-computing-41a84-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "cloud-computing-41a84",
+            storageBucket: "cloud-computing-41a84.appspot.com",
+            messagingSenderId: "777679253551",
+            appId: "1:777679253551:web:38d1fb0daece7e167196da",
+            measurementId: "G-H56T8QCF3J"
+        };
+    
+        // Inisialisasi Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+    
+        // Ambil elemen-elemen dari DOM
+        const loginContainer = document.getElementById("login");
+        const registerContainer = document.getElementById("register");
+
+        function login() {
+            loginContainer.style.display = "block"; // tampilkan login
+            registerContainer.style.display = "none"; // sembunyikan register
+        }
+
+        function register() {
+            loginContainer.style.display = "none"; // sembunyikan login
+            registerContainer.style.display = "block"; // tampilkan register
+        }
+
+        function handleLogin() {
+            window.location.href = "home.html"; // Redirect ke halaman home setelah login
+        }
+
+        function handleRegister() {
+            alert("Registration successful! Please login.");
+            login(); // Pindah ke form login setelah registrasi
+        }
+
+        // Ambil tombol login dan register
+        const loginButton = document.getElementById('login-btn');
+        const registerButton = document.getElementById('reg');
+
+        // Tambahkan event listener ke tombol login dan register
+        if (loginButton) loginButton.onclick = handleLogin;
+        if (registerButton) registerButton.onclick = handleRegister;
+
+        // Ambil elemen Sign Up link dan tambahkan event listener
+        document.getElementById('sign-up-link').addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah reload halaman
+            register(); // Panggil fungsi register
+        });
+    
+        // Inisialisasi: Tampilkan form login secara default
+        window.onload = function() {
+            login();
+        };
+    
+        // Fungsi untuk menangani registrasi dan menyimpan data ke Firebase Realtime Database
+        document.getElementById("reg").addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah reload halaman
+            
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("pass").value;
+            const firstname = document.getElementById("fn").value;
+            const lastname = document.getElementById("ln").value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+          
+            // Simpan data pengguna ke Realtime Database
+            set(ref(db, 'users/' + email.replace('.', '_')), {
+                email: email,
+                password: password,
+                firstname: firstname,
+                lastname: lastname
+            })
+            .then(() => {
+                alert("Register Succeed");
+                handleRegister();
+            })
+            .catch((error) => {
+                console.error("Error saat registrasi:", error);
+                alert("Register Failed");
+            });
+        });
+    });
+
+    document.getElementById("login-btn").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("Username").value;
+    const password = document.getElementById("pass").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Login berhasil
+            alert("Login Succeed");
+            window.location.href = "home.html"; // Redirect ke halaman utama
+        })
+        .catch((error) => {
+            // Tampilkan pesan error jika login gagal
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(`Login Failed: ${errorMessage}`);
+        });
+});
+    </script>
+</body>
+</html>

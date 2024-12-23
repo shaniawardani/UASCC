@@ -1,0 +1,155 @@
+:root {
+    --primary: #fb6bd9;
+    --bg: #ffd700;
+}
+
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding-top: 100px; /* Tambahkan padding atas untuk menghindari navbar yang fixed */
+}
+
+/* Navbar Styling */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4b59f7;
+    border-bottom: 1px solid var(--primary);
+    position: fixed;
+    padding: 1.4rem 7%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-logo span {
+    color: #FFD700;
+}
+
+.navbar-nav a {
+    margin: 0 15px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar-nav a:hover {
+    color: #FFD700;
+}
+
+.navbar-extra a {
+    color: #ffffff;
+    font-size: 20px;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+/* About Section Styling */
+.about-content {
+    text-align: center;
+    padding: 0 10%;
+}
+
+.about-content h1 {
+    font-size: 2.6rem;
+    color: #4b59f7;
+    margin-bottom: 20px;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    font-weight: 200;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Section for team members or profiles */
+.member-profile-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.member-profile {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.member-profile:hover {
+    transform: scale(1.05);
+}
+
+.member-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.member-profile h2 {
+    font-size: 1.8rem;
+    color: #4b59f7;
+    margin-bottom: 10px;
+}
+
+.member-profile p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Responsiveness for smaller screens */
+@media screen and (max-width: 768px) {
+    .about-content {
+        padding: 0 5%;
+    }
+
+    .navbar {
+        padding: 1rem 5%;
+    }
+
+    .navbar-nav a {
+        margin: 0 10px;
+    }
+
+    .member-profile-container {
+        grid-template-columns: 1fr;
+    }
+}

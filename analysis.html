@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Analysis | MediLab</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Icons -->
+        <script src="https://unpkg.com/feather-icons"></script>
+
+        <!-- External CSS -->
+        <link rel="stylesheet" href="css/analysis.css" />
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <a href="index.html" class="navbar-logo">Medi<span>Lab</span>.</a>
+            <div class="navbar-nav">
+                <a href="home.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="analysis.html">Analysis</a>
+                <a href="services.html">Services</a>
+            </div>
+            <div class="navbar-extra">
+                <a href="#" id="search"><i data-feather="search"></i></a>
+                <a href="#" id="log-in"><i data-feather="log-in"></i></a>
+                <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+            </div>
+        </nav>
+
+        <!-- Analysis Section -->
+        <section id="analysis">
+            <div class="container">
+                <h1>Prediksi Klasifikasi Jumlah Penderita Kesehatan Mental</h1>
+                <p>
+                    Masukkan data untuk mendapatkan prediksi kesehatan mental.
+                </p>
+
+                <!-- Input Form for Prediction -->
+                <div class="prediction-form">
+                    <form id="predictionForm">
+                        <label for="tahun">Tahun:</label>
+                        <input
+                            type="number"
+                            id="tahun"
+                            name="tahun"
+                            placeholder="Masukkan tahun (e.g., 2025)"
+                            min="2025"
+                            required
+                        />
+
+                        <label for="kecamatan">Kecamatan:</label>
+                        <select id="kecamatan" name="kecamatan" required>
+                            <option value="">Pilih Kecamatan</option>
+                            <option value="ANDIR">ANDIR</option>
+                            <option value="ANTAPANI">ANTAPANI</option>
+                            <option value="ARCAMANIK">ARCAMANIK</option>
+                            <option value="ASTANAANYAR">ASTANAANYAR</option>
+                            <option value="BABAKAN CIPARAY">
+                                BABAKAN CIPARAY
+                            </option>
+                            <option value="BANDUNG KIDUL">BANDUNG KIDUL</option>
+                            <option value="BANDUNG KULON">BANDUNG KULON</option>
+                            <option value="BANDUNG WETAN">BANDUNG WETAN</option>
+                            <option value="BATUNUNGGAL">BATUNUNGGAL</option>
+                            <option value="BOJONGLOA KALER">
+                                BOJONGLOA KALER
+                            </option>
+                            <option value="BOJONGLOA KIDUL">
+                                BOJONGLOA KIDUL
+                            </option>
+                            <option value="BUAHBATU">BUAHBATU</option>
+                            <option value="CIBEUNYING KALER">
+                                CIBEUNYING KALER
+                            </option>
+                            <option value="CIBEUNYING KIDUL">
+                                CIBEUNYING KIDUL
+                            </option>
+                            <option value="CIBIRU">CIBIRU</option>
+                            <option value="CICENDO">CICENDO</option>
+                            <option value="CIDADAP">CIDADAP</option>
+                            <option value="CINAMBO">CINAMBO</option>
+                            <option value="COBLONG">COBLONG</option>
+                            <option value="GEDEBAGE">GEDEBAGE</option>
+                            <option value="KIARACONDONG">KIARACONDONG</option>
+                            <option value="LENGKONG">LENGKONG</option>
+                            <option value="MANDALAJATI">MANDALAJATI</option>
+                            <option value="PANYILEUKAN">PANYILEUKAN</option>
+                            <option value="RANCASARI">RANCASARI</option>
+                            <option value="REGOL">REGOL</option>
+                            <option value="SUKAJADI">SUKAJADI</option>
+                            <option value="SUKASARI">SUKASARI</option>
+                            <option value="SUMUR BANDUNG">SUMUR BANDUNG</option>
+                            <option value="UJUNG BERUNG">UJUNG BERUNG</option>
+                        </select>
+
+                        <label for="target">Target:</label>
+                        <select id="target" name="target" required>
+                            <option value="">Pilih Target</option>
+                            <option value="odgj">ODGJ</option>
+                            <option value="pelayanan">Pelayanan</option>
+                        </select>
+
+                        <button type="submit" class="btn">Prediksi</button>
+                    </form>
+                </div>
+
+                <!-- Prediction Result Section -->
+                <div
+                    id="predictionResult"
+                    class="prediction-result"
+                    style="display: none"
+                >
+                    <h3>Hasil Prediksi</h3>
+                    <p id="resultText"></p>
+                </div>
+
+                <div
+                    id="errorResult"
+                    class="error-result"
+                    style="display: none; color: red"
+                >
+                    <h3>Error</h3>
+                    <p id="errorText"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 MediLab. All rights reserved.</p>
+        </footer>
+
+        <!-- External JS -->
+        <script>
+            const form = document.getElementById("predictionForm");
+            const resultDiv = document.getElementById("predictionResult");
+            const errorDiv = document.getElementById("errorResult");
+            const resultText = document.getElementById("resultText");
+            const errorText = document.getElementById("errorText");
+
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                resultDiv.style.display = "none";
+                errorDiv.style.display = "none";
+
+                const year = document.getElementById("tahun").value;
+                const kecamatan = document.getElementById("kecamatan").value;
+                const target = document.getElementById("target").value;
+
+                try {
+                    const response = await fetch(
+                        "http://127.0.0.1:5000/predict",
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ year, kecamatan, target }),
+                        }
+                    );
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        // Round prediction result and add "orang"
+                        const roundedPrediction = Math.round(data.prediction);
+                        resultText.textContent = `Prediksi untuk ${data.year}: ${roundedPrediction} orang`;
+                        resultDiv.style.display = "block";
+                    } else {
+                        errorText.textContent = data.error;
+                        errorDiv.style.display = "block";
+                    }
+                } catch (error) {
+                    errorText.textContent = "Gagal terhubung ke server.";
+                    errorDiv.style.display = "block";
+                }
+            });
+
+            feather.replace(); // Initialize feather icons
+        </script>
+    </body>
+</html>

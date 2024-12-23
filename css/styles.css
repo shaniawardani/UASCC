@@ -1,0 +1,184 @@
+:root {
+    --primary: #fb6bd9;
+    --bg: #ffd700;
+}
+
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4b59f7;
+    border-bottom: 1px solid var(--primary);
+    position: fixed;
+    padding: 1.4rem 7%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-logo span {
+    color: #FFD700;
+}
+
+/* Form Box Styling */
+.form-box {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    max-width: 400px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Login and Register Container */
+.login-container, .register-container {
+    display: none; /* Awalnya sembunyikan, kontrol dengan JavaScript */
+}
+
+.login-container.active, .register-container.active {
+    display: block; /* Tampilkan yang aktif */
+}
+
+.top {
+    text-align: center;
+}
+
+.top span {
+    font-size: 14px;
+    color: #555;
+}
+
+.top a {
+    color: #4b59f7;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.top a:hover {
+    text-decoration: underline;
+}
+
+/* Form Input Styling */
+.input-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-fields {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.input-fields:focus {
+    border-color: #4b59f7;
+    outline: none;
+    background-color: #fff;
+}
+
+.input-box i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+/* Submit Button */
+.submit {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    background-color: #4b59f7;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit:hover {
+    background-color: #354bc1;
+}
+
+/* Two Column Section */
+.two-forms {
+    display: flex;
+    gap: 15px;
+}
+
+.two-col {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.two-col label {
+    color: #555;
+}
+
+.two-col a {
+    color: #4b59f7;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.two-col a:hover {
+    text-decoration: underline;
+}
+
+/* About Section */
+.about{
+    padding: 10rem 7% 1.4rem;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .form-box {
+        width: 90%;
+    }
+}
